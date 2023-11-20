@@ -1,0 +1,67 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Criar Tarefa</h5>
+
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="lancamentoForm">
+        <div class="form-group" *ngIf="lancamentoId === null || lancamentoId === undefined">
+          <label for="descricao">Descrição:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="descricao"
+            formControlName="descricao"
+            required
+          />
+        </div>
+
+        <div class="form-group" *ngIf="lancamentoId > 0">
+          <label for="data">Data:</label>
+          <input
+            type="date"
+            class="form-control"
+            id="data"
+            formControlName="data"
+            required
+          />
+        </div>
+        
+
+        <div class="form-group">
+          <label for="valor">Valor:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="valor"
+            formControlName="valor"
+            required
+          />
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        *ngIf="lancamentoId > 0; else createButton"
+        (click)="updateLancamento(lancamentoId)"
+        class="btn btn-primary"
+      >
+        Salvar
+      </button>
+      <ng-template #createButton>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="createLancamento()"
+        >
+          Salvar
+        </button>
+      </ng-template>
+      <button type="button" class="btn btn-secondary" (click)="fecharModal()">
+        Cancelar
+      </button>
+    </div>
+    
+  </div>
+</div>

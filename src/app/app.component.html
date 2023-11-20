@@ -1,0 +1,29 @@
+<div class="container bg-light">
+  <h2 style="margin: 0 auto; text-align: center;">Extrato</h2>
+  <div>
+    <button class="btn btn-primary mb-5" (click)="openCreateLancamentoModal()">Criar Lançamento</button>
+    <div class="mb-4">
+      <p><strong>Total: {{this.totalValor}}</strong></p>
+    </div>
+    <div class="mb-4">
+      <label for="filtroData">Filtrar por data:</label>
+      <input type="date" id="filtroData" [(ngModel)]="filtroData" class="form-control" />
+    </div>
+    
+    <ul class="list-group mb-3">
+      <li *ngFor="let lancamento of lancamentos" class="list-group-item border border-3" [ngStyle]="{'background-color': getStatusColor(lancamento.status)}">
+        <ng-container *ngIf="lancamento.data && verificarFiltroData(lancamento.data)">
+          <p class="description">{{ limparDescricao(lancamento.descricao) }}</p>
+          <p class="data">{{ lancamento.data }}</p>
+          <p class="valor">{{ lancamento.valor }}</p>
+          <p class="avulso">{{ lancamento.avulso ? 'Avulso' : 'Não Avulso' }}</p>
+          <p class="status">{{ lancamento.status }}</p>
+          <div class="button-group">
+            <button class="btn btn-danger" (click)="cancelarLancamento(lancamento.id)">Cancelar</button>
+            <button class="btn btn-warning" (click)="openCreateUpdateLancamentoModal(lancamento.id)">Editar</button>
+          </div>
+        </ng-container>
+      </li>
+    </ul>
+  </div>
+</div>
